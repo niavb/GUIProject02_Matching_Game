@@ -8,6 +8,12 @@ import javax.swing.JPanel;
 public class MatchingGamePanel extends JPanel{
 	MatchingGame mg;
 	int border = 2;
+	int nextMove = 0;
+	static int firstCardPicked = 1;
+	static int secondCardPicked = 2;
+	static int wrongPair = 3;
+	static int rightPair = 4;
+	
 	
 	public MatchingGamePanel() {
 		mg = new MatchingGame();
@@ -17,6 +23,10 @@ public class MatchingGamePanel extends JPanel{
 			}
 			System.out.println();
 		}
+	}
+	
+	public void playTurn(int x, int y) {
+		
 	}
 	
 	protected void paintComponent(Graphics g){
