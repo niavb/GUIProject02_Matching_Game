@@ -2,17 +2,19 @@ package app;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
 public class MatchingGamePanel extends JPanel {
 	MatchingGame mg;
 	int border = 2;
-	int nextMove = 0;
+	int lastMove = 0;
 	static int FIRST_CARD_PICKED = 1;
 	static int SECOND_CARD_PICKED = 2;
-	static int WRONG_PAIR = 3;
-	static int RIGHT_PAIR = 4;
+	static int CHECKED_PLAYED_CARDS = 0;
+	Map<Integer, Card> pickedCards = new HashMap<>();
 
 	public MatchingGamePanel() {
 		mg = new MatchingGame();
@@ -25,20 +27,37 @@ public class MatchingGamePanel extends JPanel {
 	}
 
 	public void turnCard(int x, int y) {
-		if (nextMove == 0) {
+		if (lastMove == CHECKED_PLAYED_CARDS) {
 			mg.gameField[y][x] = mg.gameField[y][x] * 10;
-			nextMove++;
-		}else if(nextMove == FIRST_CARD_PICKED){
+			pickedCards.put(1, new Card(x, y, mg.gameField[y][x]));
+			lastMove++;
+		}else if(lastMove == FIRST_CARD_PICKED){
 			mg.gameField[y][x] = mg.gameField[y][x] * 10;
-			nextMove++;
-		}else if(nextMove == SECOND_CARD_PICKED){
-			checkIfPair();
+			pickedCards.put(2, new Card(x, y, mg.gameField[y][x]));
+			lastMove++;
+		}else if(lastMove == SECOND_CARD_PICKED){
+			lastMove = CHECKED_PLAYED_CARDS;
+			if(checkIfPair()) {
+				mg.gameField[pickedCards.get(1).y][pickedCards.get(1).x]=0;
+				mg.gameField[pickedCards.get(2).y][pickedCards.get(2).x]=0;
+				pickedCards.remove(1);
+				pickedCards.remove(2);
+			}else {
+				mg.gameField[pickedCards.get(1).y][pickedCards.get(1).x]/=10;
+				mg.gameField[pickedCards.get(2).y][pickedCards.get(2).x]/=10;
+				pickedCards.remove(1);
+				pickedCards.remove(2);
+			}
 		}
 		repaint();
 	}
 	
 	public boolean checkIfPair(){
-		return true;
+		int card1 = pickedCards.get(1).value;
+		int card2 = pickedCards.get(2).value;
+		if(card1==card2) {
+			return true;
+		}else return false;
 	}
 
 	protected void paintComponent(Graphics g) {
