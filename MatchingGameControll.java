@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 
 public class MatchingGameControll extends JPanel{
-	private MatchingGamePanel matchingGamePanel = new MatchingGamePanel();
+	public MatchingGamePanel matchingGamePanel = new MatchingGamePanel();
 	
 	public MatchingGameControll() {
 		setLayout(new BorderLayout());

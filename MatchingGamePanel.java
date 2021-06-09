@@ -25,6 +25,17 @@ public class MatchingGamePanel extends JPanel {
 			System.out.println();
 		}
 	}
+	
+	public boolean gameFinished() {
+		for (int i = 0; i < mg.gameField.length; i++) {
+			for (int j = 0; j < mg.gameField[i].length; j++) {
+				if(mg.gameField[i][j]!=0) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	public void turnCard(int x, int y) {
 		if (lastMove == CHECKED_PLAYED_CARDS) {
