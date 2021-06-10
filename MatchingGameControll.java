@@ -1,10 +1,11 @@
 package app;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+
 
 public class MatchingGameControll extends JPanel{
 	public MatchingGamePanel matchingGamePanel = new MatchingGamePanel();

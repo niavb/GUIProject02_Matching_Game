@@ -10,7 +10,12 @@ import javax.swing.JPanel;
 public class MatchingGamePanel extends JPanel {
 	MatchingGame mg;
 	int border = 2;
+	
 	int moves = 0;
+	long time = 0;
+	long startTime;
+	long endTime;
+	
 	int lastMove = 0;
 	static int FIRST_CARD_PICKED = 1;
 	static int SECOND_CARD_PICKED = 2;
@@ -46,10 +51,12 @@ public class MatchingGamePanel extends JPanel {
 		}else if(lastMove == FIRST_CARD_PICKED){
 			mg.gameField[y][x] = mg.gameField[y][x] * 10;
 			pickedCards.put(2, new Card(x, y, mg.gameField[y][x]));
+			if(moves==0) {
+				startTime = System.currentTimeMillis();
+			}
 			moves++;
 			lastMove = SECOND_CARD_PICKED;
 		}else if(lastMove == SECOND_CARD_PICKED){
-			lastMove = CHECKED_PLAYED_CARDS;
 			if(checkIfPair()) {
 				mg.gameField[pickedCards.get(1).y][pickedCards.get(1).x]=0;
 				mg.gameField[pickedCards.get(2).y][pickedCards.get(2).x]=0;
@@ -61,6 +68,12 @@ public class MatchingGamePanel extends JPanel {
 				pickedCards.remove(1);
 				pickedCards.remove(2);
 			}
+			if(gameFinished()) {
+				endTime = System.currentTimeMillis();
+				time = (endTime - startTime) / 1000;
+				//advame v priorityQueue ScoreRecord(...)
+			}
+			lastMove = CHECKED_PLAYED_CARDS;
 		}
 		repaint();
 	}
