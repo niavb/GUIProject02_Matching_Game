@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,6 +17,7 @@ public class StartGame {
 	public static String START_PANEL = "Start game";
 	public static String GAME_PANEL = "Game panel";
 	public static String SCORE_PANEL = "Score panel";
+//	PriorityQueue<ScoreRecord> scoresRecord = new PriorityQueue<ScoreRecord>();
 	
 	public static void main(String[] args){
 		JFrame frame = new JFrame();
@@ -33,9 +38,21 @@ public class StartGame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
+		try {
+			Scanner in = new Scanner(new File("src/app/recordOfPreviousScores.txt"));
+			PriorityQueue<ScoreRecord> scoresRecord = new PriorityQueue<ScoreRecord>();
+			while(in.hasNext()){
+				String line = in.nextLine();
+				String[] elements = line.split(", ");
+//				scoresRecord.add(new ScoreRecord(elements[0], elements[1], elements[2]));
+				
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		cardLayout.show(mainPanel, START_PANEL);
-		
-		
 		
 		smp.startBtn.addActionListener(new ActionListener() {
 
