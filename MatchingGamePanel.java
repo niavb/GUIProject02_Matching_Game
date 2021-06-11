@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 import javax.swing.JPanel;
 
@@ -15,6 +16,7 @@ public class MatchingGamePanel extends JPanel {
 	long time = 0;
 	long startTime;
 	long endTime;
+//	PriorityQueue<ScoreRecord> scoresRecord = new PriorityQueue<>();
 	
 	int lastMove = 0;
 	static int FIRST_CARD_PICKED = 1;
@@ -71,7 +73,7 @@ public class MatchingGamePanel extends JPanel {
 			if(gameFinished()) {
 				endTime = System.currentTimeMillis();
 				time = (endTime - startTime) / 1000;
-				//advame v priorityQueue ScoreRecord(...)
+//				scoresRecord.add(new ScoreRecord(moves, time, name));
 			}
 			lastMove = CHECKED_PLAYED_CARDS;
 		}
