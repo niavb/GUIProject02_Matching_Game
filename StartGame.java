@@ -26,6 +26,8 @@ public class StartGame {
 	public static StartMenuPanel smp = new StartMenuPanel();
 	public static MatchingGameControll mgc = new MatchingGameControll();
 	public static ScoreOfCurrentGamePanel scgp = new ScoreOfCurrentGamePanel();
+	public static CardLayout cardLayout = new CardLayout();
+	public static JPanel mainPanel = new JPanel(cardLayout);
 	
 	public static void readFile(String filePath) throws IOException {
 		BufferedReader in = new BufferedReader(new FileReader(filePath));
@@ -48,9 +50,9 @@ public class StartGame {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setSize(500, 400);
-		CardLayout cardLayout = new CardLayout();
 		
-		JPanel mainPanel = new JPanel(cardLayout);
+		
+		
 		mainPanel.add(smp, START_PANEL);
 		mainPanel.add(mgc, GAME_PANEL);
 		mainPanel.add(scgp, SCORE_PANEL);
@@ -63,15 +65,25 @@ public class StartGame {
 		
 		cardLayout.show(mainPanel, START_PANEL);
 		
+		
 		smp.startBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				cardLayout.show(mainPanel, GAME_PANEL);
 				smp.name = smp.textFieldForName.getText();
+				try {
+					if (!smp.textFieldForName.getText().equals("")) {
+						cardLayout.show(mainPanel, GAME_PANEL);
+					} else {
+						throw new NoNameAddedException();
+					}
+				} catch (NoNameAddedException e) {
+					System.out.println(e);
+				}
+
 			}
-			
+
 		});
 		
 		mgc.matchingGamePanel.addMouseListener(new MouseListener(){
@@ -120,18 +132,6 @@ public class StartGame {
 			
 		});
 		
-//		try {
-//			readFile("src/app/recordOfPreviousScores.txt");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		int rank = 1;
-//		while(!scoresRecord.isEmpty()) {
-//			scgp.textAreaOfScores.append(String.valueOf(rank) + ". " + scoresRecord.poll().toString() + "\n");
-//			rank++;
-//		}
 		
 	}
 
