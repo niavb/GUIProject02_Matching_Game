@@ -32,17 +32,6 @@ public class StartMenuPanel extends JPanel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		add(textFieldForName, gbc);
 		
-		startBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				//////////////////
-				name = textFieldForName.getText();
-			}
-			
-		});
-		
 	}
 
 }
