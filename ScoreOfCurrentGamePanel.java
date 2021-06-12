@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class ScoreOfCurrentGamePanel extends JPanel {
+	JTextArea textAreaOfScores;
 
 	public ScoreOfCurrentGamePanel() {
 		
@@ -31,13 +32,13 @@ public class ScoreOfCurrentGamePanel extends JPanel {
 		JLabel yourMovesLabel = new JLabel();
 		JLabel yourTimeLabel = new JLabel();
 		
-		JTextArea textArea = new JTextArea(5, 20);
-		textArea.setEditable(false);
+		textAreaOfScores = new JTextArea(5, 20);
+		textAreaOfScores.setEditable(false);
 		gbc.gridx = 2;
 		gbc.gridy = 3;
 		gbc.gridwidth = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		add(textArea, gbc);
+		add(textAreaOfScores, gbc);
 
 
 	}
