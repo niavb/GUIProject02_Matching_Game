@@ -49,7 +49,7 @@ public class StartGame {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
-		frame.setSize(500, 400);
+		frame.setSize(750, 600);
 		
 		
 		
@@ -58,7 +58,7 @@ public class StartGame {
 		mainPanel.add(scgp, SCORE_PANEL);
 		
 		frame.add(mainPanel);
-		frame.setTitle("Matching Game");
+		frame.setTitle("Memory Game");
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -92,6 +92,8 @@ public class StartGame {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				if(mgc.matchingGamePanel.gameFinished()){
+					scgp.yourScoreLabel.setText("Your score: " + String.valueOf(mgc.matchingGamePanel.moves) + " moves " +
+				String.valueOf(mgc.matchingGamePanel.time) + " sec");
 					cardLayout.show(mainPanel, SCORE_PANEL);
 					try {
 						writeToFile("src/app/recordOfPreviousScores.txt");

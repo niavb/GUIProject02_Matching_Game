@@ -18,7 +18,7 @@ public class ScoreRecord implements Comparable<ScoreRecord>{
 	}
 	
 	public String toString() {
-		return moves + " " + time + " " + name;
+		return name + ": " + moves + " moves " + time + " sec ";
 	}
 
 	
